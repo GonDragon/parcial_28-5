@@ -8,17 +8,17 @@ def cargar_matriz_notas():
     Crear una matriz. Pedir que ingrese una nota para cada examen, y valide si es una nota valida.
     """
 
-    n = obtener_entero("Ingrese la cantidad de alumnos: ")
-    m = obtener_entero("Ingrese la cantidad de examenes: ")
+    cant_alumnos = obtener_entero("Ingrese la cantidad de alumnos: ")
+    cant_examenes = obtener_entero("Ingrese la cantidad de examenes: ")
 
     # Inicializamos la matriz con N listas vacias
     matriz = []
-    for x in range(0,n): matriz.append([])
+    for x in range(0,cant_alumnos): matriz.append([])
 
     print('Se inicia la carga de notas')
-    for alumno in range(0,n):
+    for alumno in range(0,cant_alumnos):
         print(f'\nInicio de carga de notas para el alumno n°{alumno+1}')
-        for examen in range(0,m):
+        for examen in range(0,cant_examenes):
             nota = obtener_nota_valida(f'- Ingrese la nota del examen n°{examen+1}: ')
             matriz[alumno].append(nota)
 
@@ -33,6 +33,7 @@ def porcentaje_aprobados(matriz):
     Imprime por pantalla un resumen individual por cada alumno
     """
     
+    # Iteramos por los alumnos usando un indice
     for i_alumno in range(0,len(matriz)):
         print(f'\nDatos del alumno {i_alumno + 1}')
         print(f'Lista de notas: {matriz[i_alumno]}')
