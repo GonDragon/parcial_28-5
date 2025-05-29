@@ -10,7 +10,13 @@ def cargar_matriz_notas():
     """
 
     cant_alumnos = obtener_entero("Ingrese la cantidad de alumnos: ")
+    if cant_alumnos < 1:
+        print('Debe haber al menos 1 alumno!')
+        return None
     cant_examenes = obtener_entero("Ingrese la cantidad de examenes: ")
+    if cant_examenes < 1:
+        print('Debe haber al menos 1 examen!')
+        return None
 
     # Inicializamos la matriz con N listas vacias
     matriz = []
