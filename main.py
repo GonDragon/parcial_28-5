@@ -39,6 +39,12 @@ def porcentaje_aprobados(matriz):
         print(f'Lista de notas: {matriz[i_alumno]}')
         print(f'Porcentaje de aprobacion: {obtener_porcentaje_aprobacion(matriz[i_alumno])}%')
 
+def mejor_promedio(matriz):
+    pass
+
+def buscar_nota(matriz):
+    pass
+
 def main():
 
     opciones = ['salir', 'cargar','porcentaje','promedio','buscar']
@@ -67,9 +73,9 @@ def main():
                 porcentaje_aprobados(matriz)
                 print('')
             case 3:
-                pass
+                mejor_promedio(matriz)
             case 4:
-                pass
+                buscar_nota(matriz)
             
 
 if __name__ == "__main__":
