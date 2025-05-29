@@ -1,4 +1,4 @@
-from utilidades import obtener_entero, obtener_nota_valida, obtener_porcentaje_aprobacion
+from utilidades import obtener_entero, obtener_nota_valida, obtener_porcentaje_aprobacion, obtener_opcion
 
 def cargar_matriz_notas():
     """
@@ -40,12 +40,36 @@ def porcentaje_aprobados(matriz):
         print(f'Porcentaje de aprobacion: {obtener_porcentaje_aprobacion(matriz[i_alumno])}%')
 
 def main():
-    matriz = cargar_matriz_notas()
 
-    for coso in matriz:
-        print(coso)
+    opciones = ['salir', 'cargar','porcentaje','promedio','buscar']
 
-    porcentaje_aprobados(matriz)
+    print('Bienvenido al sistema de carga. Sus opciones son:')
+    print('matriz - genera y carga la matriz de notas de los alumnos')
+    print('porcentaje - obtiene el porcentaje de aprobacion de cada alumno, y muestra un resumen individual')
+    print('promedio - obtener el alumno con mejor promedio')
+    print('buscar - permite ingresar una nota y ver quienes sacaron esa nota en qué examen')
+
+    # El bucle principal continua hasta que el usuario quiera salir. Salir es la opcion 0.
+    matriz = None
+    seleccion = None
+    while seleccion != 0:
+        seleccion = obtener_opcion('Que desea hacer? ',opciones)
+
+        # Hasta que la matriz no este cargada, lo unico que se puede hacer es cargar la matriz o salir
+        if not matriz and not (seleccion == 0 or seleccion == 1):
+            print('\nPrimero debe cargar las notas!')
+            continue
+
+        match seleccion:
+            case 1:
+                matriz = cargar_matriz_notas()
+            case 2:
+                porcentaje_aprobados(matriz)
+                print('')
+            case 3:
+                pass
+            case 4:
+                pass
             
 
 if __name__ == "__main__":

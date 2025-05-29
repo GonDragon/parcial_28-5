@@ -39,3 +39,22 @@ def obtener_porcentaje_aprobacion(notas):
             aprobadas += 1
 
     return (aprobadas * 100) / total
+
+def obtener_opcion(pregunta, opciones):
+    """
+    Recibe una pregunta como str, y una lista de opciones como lista de strings
+    Le pide un usuario un valor. Sigue preguntando hasta que el valor se encuentre en la lista.
+    Ignora mayusculas para mayor consistencia
+    Devuelve el indice de la opcion seleccionada en la lista de opciones
+    """
+
+    # Copio la lista para no modificar la lista original y a su vez, tener todo en minuscula
+    opciones_minusc = [opcion.lower() for opcion in opciones]
+
+    value = input(pregunta).lower()
+
+    while not value in opciones_minusc:
+        print(f'\nLas opciones validas son: { " - ".join(opciones) }')
+        value = input(pregunta).lower()
+
+    return opciones_minusc.index(value)
