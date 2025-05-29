@@ -55,15 +55,28 @@ def mejor_promedio(matriz):
 
     return indice, max_prom
 
-def buscar_nota(matriz):
-    pass
+def buscar_nota(matriz,nota_a_buscar):
+    """
+    Recibe la matriz de alumnos y una nota valida
+    Devuelve una lista de tuplas
+    Cada tupla esta formada por el indice del alumno, y el indice del examen (coordenadas de la matriz)
+    """
+    notas_encontradas = []
+
+    for i_alumno in range(0,len(matriz)):
+        notas = matriz[i_alumno]
+        for i_nota in range(0,len(notas)):
+            if notas[i_nota] == nota_a_buscar:
+                notas_encontradas.append((i_alumno,i_nota))
+
+    return notas_encontradas
 
 def main():
 
     opciones = ['salir', 'cargar','porcentaje','promedio','buscar']
 
     print('Bienvenido al sistema de carga. Sus opciones son:')
-    print('matriz - genera y carga la matriz de notas de los alumnos')
+    print('cargar - genera y carga la matriz de notas de los alumnos')
     print('porcentaje - obtiene el porcentaje de aprobacion de cada alumno, y muestra un resumen individual')
     print('promedio - obtener el alumno con mejor promedio')
     print('buscar - permite ingresar una nota y ver quienes sacaron esa nota en qué examen')
@@ -79,19 +92,27 @@ def main():
             print('\nPrimero debe cargar las notas!')
             continue
 
+        # Los alumnos y examenes se cuentan desde el 1ro, pero las listas de python empiezan en 0
+        # Por lo que siempre hay que sumarle 1 a los indices que quieran mostrarse por pantalla
         match seleccion:
             case 1:
                 matriz = cargar_matriz_notas()
             case 2:
                 porcentaje_aprobados(matriz)
-                print('')
             case 3:
                 i_alumno, prom = mejor_promedio(matriz)
-                # Los alumnos se cuentan desde el 1ro, pero las listas empiezan en 0
-                # Por lo que siempre hay que sumarle 1 al indice antes de mostrarlo por pantalla
                 print(f'El alumno N°{i_alumno + 1} tiene el mejor promedio: {prom}')
             case 4:
-                buscar_nota(matriz)
+                nota = obtener_nota_valida('Que valor de nota desea buscar? ')
+                resultados = buscar_nota(matriz,nota)
+                if len(resultados) < 1:
+                    print('No se ha encontrado esa nota')
+                else:
+                    print(f'Notas de valor {nota} encontradas:')
+                    for resultado in resultados:
+                        print(f'- Alumno N°{resultado[0] + 1}, examen N°{resultado[1] + 1}')
+            
+        print('')
             
 
 if __name__ == "__main__":
