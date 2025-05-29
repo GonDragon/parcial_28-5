@@ -1,4 +1,4 @@
-from utilidades import obtener_entero, obtener_nota_valida, obtener_porcentaje_aprobacion, obtener_opcion
+from utilidades import obtener_entero, obtener_nota_valida, obtener_porcentaje_aprobacion, obtener_opcion, calcular_promedio
 
 def cargar_matriz_notas():
     """
@@ -40,7 +40,20 @@ def porcentaje_aprobados(matriz):
         print(f'Porcentaje de aprobacion: {obtener_porcentaje_aprobacion(matriz[i_alumno])}%')
 
 def mejor_promedio(matriz):
-    pass
+    """
+    Calcula el promedio de cada alumno y determina cuál tiene el mejor.
+    Devuelve una tupla con el indice del alumno, y el valor de su promedio
+    """
+    indice = -1
+    max_prom = -1
+
+    for i in range(0,len(matriz)):
+        prom = calcular_promedio(matriz[i])
+        if prom > max_prom:
+            max_prom = prom
+            indice = i
+
+    return indice, max_prom
 
 def buscar_nota(matriz):
     pass
@@ -73,7 +86,10 @@ def main():
                 porcentaje_aprobados(matriz)
                 print('')
             case 3:
-                mejor_promedio(matriz)
+                i_alumno, prom = mejor_promedio(matriz)
+                # Los alumnos se cuentan desde el 1ro, pero las listas empiezan en 0
+                # Por lo que siempre hay que sumarle 1 al indice antes de mostrarlo por pantalla
+                print(f'El alumno N°{i_alumno + 1} tiene el mejor promedio: {prom}')
             case 4:
                 buscar_nota(matriz)
             

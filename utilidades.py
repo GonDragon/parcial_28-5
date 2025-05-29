@@ -58,3 +58,17 @@ def obtener_opcion(pregunta, opciones):
         value = input(pregunta).lower()
 
     return opciones_minusc.index(value)
+
+def calcular_promedio(notas):
+    """
+    Recibe una lista de notas. Las notas deben ser int o float.
+    Devuelve el promedio de las notas
+    """
+    suma = 0.0
+    for nota in notas:
+        if not (isinstance(nota,int) or isinstance(nota,float)):
+            print('Aqui debería ir un raise, valor no valido')
+            return -1
+        suma += nota
+
+    return suma / len(notas)
